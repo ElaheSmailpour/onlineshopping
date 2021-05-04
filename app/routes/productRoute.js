@@ -1,6 +1,6 @@
 const router=require("express").Router()
-const productController=require("../http/controller/ProductController")
-router.get("/api/list",productController.productlist)
+const ProductController=require("../http/controller/ProductController")
+router.get("/api/list",ProductController.productList)
 
 
 

@@ -15,7 +15,8 @@ class UserController {
         const match = await bcrypt.compare(password, user.password)
         if (!match)
             return res.status(404).send("password incorrect")
-        const token = jwt.sign({email, _id: user._id}, process.env.JWT_KEY)
+        const token = jwt.sign({
+            email, _id: user._id}, process.env.JWT_KEY)
         res.send(token);
     }
 
