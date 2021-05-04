@@ -2,11 +2,12 @@ const express = require("express")
 const mongoose = require("mongoose")
 const routes = require("./routes/index")
 
+
 class App {
     constructor() {
         this.setupConfig()
         this.setupServer()
-        this.setupDb()
+        this.setupDB()
     }
 
     setupServer() {
@@ -24,14 +25,21 @@ class App {
         require("dotenv").config();
     }
 
-    setupDb() {
-        mongoose.connect("mongodb://localhost:27017/germanOnlineShop", (err) => {
-            if (err)
-                console.log(err)
-            else console.log("db connected")
-        })
-    }
+    setupDB() {
+        
+        let addressString = process.env.mongo || "mongodb://localhost:27017/onlineshopping";
+        let optionen = { useNewUrlParser: true, useUnifiedTopology: true };
+        
+        mongoose.connect(addressString, optionen).then( (mongooseModul) => {
+            console.log("connected...");
+         
+    
+        } ).catch( (error) => {
+            console.error("MongoDB error: "+error);
+        } );
+        
 
+}
 }
 
 module.exports = App;
